@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { IItem } from '../types/todo';
 
-interface IProps {
-  onAddTodo: (todo: IItem) => void;
-}
+import { useTodoStore } from '../store/store';
 
 type OnlyText = Pick<IItem, 'text'>;
 
-const TodoAdd: React.FC<IProps> = ({ onAddTodo }) => {
+const TodoAdd: React.FC = () => {
   const [todoText, setTodoText] = useState<Partial<OnlyText>>({});
+  const addTodo = useTodoStore(state => state.addTodo);
 
   const textHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTodoText({
@@ -21,7 +20,7 @@ const TodoAdd: React.FC<IProps> = ({ onAddTodo }) => {
     if (!todoText.text) {
       return;
     }
-    onAddTodo(todoText as IItem);
+    addTodo(todoText as IItem);
     setTodoText({ text: '' });
   };
 

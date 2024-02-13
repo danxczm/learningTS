@@ -1,4 +1,4 @@
-export interface IItem {
+export type IItem = {
   id: string;
   text: string;
-}
+};

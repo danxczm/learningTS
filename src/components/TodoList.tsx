@@ -1,15 +1,11 @@
 import React from 'react';
-import { IItem } from '../types/todo';
+import { useTodoStore } from '../store/store';
 
-interface IProps {
-  todos: IItem[];
-  onRemoveTodo: (id: string) => void;
-}
+const TodoList: React.FC = () => {
+  const todos = useTodoStore(state => state.todos);
+  const onRemoveTodo = useTodoStore(state => state.deleteTodo);
 
-const TodoList: React.FC<IProps> = ({ todos, onRemoveTodo }) => {
   let content: JSX.Element[];
-
-  console.log(`todos: `, todos);
 
   if (todos.length === 0) {
     return <span>There are no tasks for today yet!</span>;
